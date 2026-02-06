@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Learner extends Model
 {
+    /**
+     * DESIGN PATTERN: Active Record
+     * This model directly represents the learners table.
+     */
+
+   
     use HasFactory;
 
     /**
@@ -18,4 +24,12 @@ class Learner extends Model
         'firstname',
         'lastname',
     ];
+
+     /**
+     * DESIGN PATTERN: One-to-Many Relationship
+     * A learner can have many enrollments.
+     */
+    public function enrollments(){
+        return $this->hasMany(Enrolment::class);
+    }
 }

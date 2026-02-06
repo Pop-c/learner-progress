@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enrolment extends Model
 {
+
+/**
+     * DESIGN PATTERN: Association Object
+     * Enrollment exists to connect Learners and Courses
+     * and hold progress.
+     */
+
+
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -39,4 +47,22 @@ class Enrolment extends Model
     protected $casts = [
         'progress' => 'decimal:2',
     ];
+
+
+
+    /**
+     * Each enrollment belongs to ONE learner.
+     * Progress belongs to Enrollment
+     */
+     public function learner(){
+        return $this->belongsTo(Learner::class);
+    }
+
+     /**
+     * Each enrollment belongs to ONE course.
+     * Progress belongs to Enrollment
+     */
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 }
